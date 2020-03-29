@@ -7,27 +7,9 @@ import WelcomeNav from '../components/WelcomeNav';
 import Footer from '../components/Footer';
 
 class Home extends Component {
-  state = {
-    isPasswordShown: false,
-    isFocused: false,
-  };
-
   componentDidMount() {
-    document.title = 'Admin / D.O.S Login | Grader';
+    document.title = 'Student Login | Grader';
   }
-
-  showPassword = () => {
-    const { isPasswordShown } = this.state;
-    this.setState({ isPasswordShown: !isPasswordShown });
-  };
-
-  handleFocus = () => {
-    this.setState({ isFocused: true });
-  };
-
-  handleFocusOut = () => {
-    this.setState({ isFocused: false });
-  };
 
   render() {
     const date = new Date();
@@ -48,13 +30,9 @@ class Home extends Component {
       icon = 'moon';
     }
 
-    const { isPasswordShown, isFocused } = this.state;
-    const togglEye = isPasswordShown ? 'eye-slash' : 'eye';
-    const slashColor = isPasswordShown ? '#1ca48c' : '#9199a6';
-
     return (
       <>
-        <WelcomeNav compt="home" />
+        <WelcomeNav compt="student" />
         <div className="login-section">
           <div className="container-fluid">
             <div className="row">
@@ -91,57 +69,24 @@ class Home extends Component {
                         className="form-pic"
                       />
                     </center>
-
                     <h6 className="mt-4 text-center">
                       <span className="">
-                        <FontAwesomeIcon icon={['fas', 'user-lock']} />
+                        <FontAwesomeIcon icon={['fas', 'user-graduate']} />
                       </span>{' '}
-                      Admin / D.O.S Login
+                      Student Login
                     </h6>
                     <div className="form-underline" />
                     <div className="form-group">
                       <input
-                        type="email"
-                        id="email"
+                        type="text"
+                        id="regnum"
                         className="form-control"
-                        placeholder="Enter Email"
+                        placeholder="Enter Reg NO."
                         onChange=""
                         required
                       />
                     </div>
-                    <div className="form-group">
-                      <div className="input-group mb-3 mt-4">
-                        <input
-                          className="form-control"
-                          type={isPasswordShown ? 'text' : 'password'}
-                          id="password"
-                          placeholder="Enter Password"
-                          onChange=""
-                          onFocus={this.handleFocus}
-                          onBlur={this.handleFocusOut}
-                          required
-                        />
-                        <div className="input-group-append">
-                          <span
-                            className="input-group-text"
-                            style={{
-                              borderBottomStyle: 'solid',
-                              borderBottomWidth: '1px',
-                              borderBottomColor: isFocused
-                                ? '#1ca48c'
-                                : '#9199a6',
-                            }}
-                          >
-                            <FontAwesomeIcon
-                              icon={['fas', togglEye]}
-                              className="pass-icon"
-                              onClick={this.showPassword}
-                              style={{ color: slashColor }}
-                            />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+
                     <div className="form-group">
                       <center>
                         <button
@@ -159,7 +104,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer compt="student" />
       </>
     );
   }
