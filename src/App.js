@@ -7,6 +7,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import store from './redux/store';
 import './styles/index.css';
 import Home from './pages/Home';
+import StudentLogin from './pages/StudentLogin';
+import TeacherLogin from './pages/TeacherLogin';
 import NotFound from './pages/NotFound';
 
 library.add(fab, fas);
@@ -16,6 +18,8 @@ const App = () => (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/student-login" component={StudentLogin} />
+        <Route exact path="/teacher-login" component={TeacherLogin} />
         <Route path="/*" component={NotFound} />
       </Switch>
     </Router>

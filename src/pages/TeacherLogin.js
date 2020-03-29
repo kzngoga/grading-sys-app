@@ -13,7 +13,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    document.title = 'Admin / D.O.S Login | Grader';
+    document.title = 'Teacher Login | Grader';
   }
 
   showPassword = () => {
@@ -54,7 +54,7 @@ class Home extends Component {
 
     return (
       <>
-        <WelcomeNav compt="home" />
+        <WelcomeNav compt="teacher" />
         <div className="login-section">
           <div className="container-fluid">
             <div className="row">
@@ -91,12 +91,11 @@ class Home extends Component {
                         className="form-pic"
                       />
                     </center>
-
                     <h6 className="mt-4 text-center">
                       <span className="">
-                        <FontAwesomeIcon icon={['fas', 'user-lock']} />
+                        <FontAwesomeIcon icon={['fas', 'chalkboard-teacher']} />
                       </span>{' '}
-                      Admin / D.O.S Login
+                      Teacher Login
                     </h6>
                     <div className="form-underline" />
                     <div className="form-group">
@@ -109,6 +108,7 @@ class Home extends Component {
                         required
                       />
                     </div>
+
                     <div className="form-group">
                       <div className="input-group mb-3 mt-4">
                         <input
@@ -142,6 +142,7 @@ class Home extends Component {
                         </div>
                       </div>
                     </div>
+
                     <div className="form-group">
                       <center>
                         <button
