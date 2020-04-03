@@ -1,20 +1,132 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable consistent-return */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-deprecated */
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import WelcomeNav from '../components/WelcomeNav';
 import Footer from '../components/Footer';
+import '../styles/index.css';
+import loginAction from '../redux/actions/user/login';
 
 class Home extends Component {
   state = {
     isPasswordShown: false,
     isFocused: false,
+    email: '',
+    password: '',
+    loadText: false,
+    isSubmitted: false,
+    withErrors: false,
+    ErrMessage: '',
   };
 
   componentDidMount() {
     document.title = 'Admin / D.O.S Login | Grader';
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { login } = nextProps;
+    if (login.status === 'success') {
+      this.setState({
+        email: '',
+        password: '',
+        loadText: false,
+        isSubmitted: true,
+        withErrors: false,
+      });
+
+      if (login.userData.role === 'Admin') {
+        this.props.history.push('/admin/home');
+        // Check if there is any token or data saved before
+        const firstToken = localStorage.getItem('AdminToken');
+        const firstData = localStorage.getItem('AdminData');
+
+        if (!firstToken || !firstData) {
+          // Remove any token or data saved before
+          localStorage.removeItem('AdminData');
+          localStorage.removeItem('AdminToken');
+
+          // Add new token or data
+          localStorage.setItem('AdminToken', login.userData.token);
+          localStorage.setItem('AdminData', JSON.stringify(login.userData));
+        } else {
+          // Add new token or data
+          localStorage.setItem('AdminToken', login.userData.token);
+          localStorage.setItem('AdminData', JSON.stringify(login.userData));
+        }
+      }
+
+      if (login.userData.role === 'DOS') {
+        this.props.history.push('/dos/home');
+        // Check if there is any token or data saved before
+        const firstToken = localStorage.getItem('DosToken');
+        const firstData = localStorage.getItem('DosData');
+
+        if (!firstToken || !firstData) {
+          // Remove any token or data saved before
+          localStorage.removeItem('DosData');
+          localStorage.removeItem('DosToken');
+
+          // Add new token or data
+          localStorage.setItem('DosToken', login.userData.token);
+          localStorage.setItem('DosData', JSON.stringify(login.userData));
+        } else {
+          // Add new token or data
+          localStorage.setItem('DosToken', login.userData.token);
+          localStorage.setItem('DosData', JSON.stringify(login.userData));
+        }
+      }
+    }
+
+    if (login.status === 'error') {
+      const {
+        error: { status },
+      } = login;
+      if (status === 500) {
+        this.setState({
+          withErrors: true,
+          loadText: false,
+          isSubmitted: true,
+          ErrMessage: 'Ooops, An error Occured!',
+        });
+      }
+      if (status === 404) {
+        return this.setState({
+          loadText: false,
+          withErrors: true,
+          isSubmitted: true,
+          ErrMessage: 'Email does not exist!',
+        });
+      }
+      if (status === 400) {
+        return this.setState({
+          loadText: false,
+          withErrors: true,
+          isSubmitted: true,
+          ErrMessage: 'Password is Incorrect!',
+        });
+      }
+    }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { loginAction: login } = this.props;
+    this.setState({
+      loadText: true,
+    });
+    const { email, password } = this.state;
+    return login({ email, password });
+  };
 
   showPassword = () => {
     const { isPasswordShown } = this.state;
@@ -27,6 +139,10 @@ class Home extends Component {
 
   handleFocusOut = () => {
     this.setState({ isFocused: false });
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
   };
 
   render() {
@@ -48,7 +164,14 @@ class Home extends Component {
       icon = 'moon';
     }
 
-    const { isPasswordShown, isFocused } = this.state;
+    const {
+      isPasswordShown,
+      isFocused,
+      loadText,
+      isSubmitted,
+      ErrMessage,
+      withErrors,
+    } = this.state;
     const togglEye = isPasswordShown ? 'eye-slash' : 'eye';
     const slashColor = isPasswordShown ? '#1ca48c' : '#9199a6';
 
@@ -79,7 +202,7 @@ class Home extends Component {
                 <div className="user-login mt-4">
                   <form
                     method=""
-                    onSubmit=""
+                    onSubmit={this.handleSubmit}
                     autoComplete="off"
                     className="py-3 px-4"
                   >
@@ -105,7 +228,7 @@ class Home extends Component {
                         id="email"
                         className="form-control"
                         placeholder="Enter Email"
-                        onChange=""
+                        onChange={this.handleChange}
                         required
                       />
                     </div>
@@ -116,9 +239,9 @@ class Home extends Component {
                           type={isPasswordShown ? 'text' : 'password'}
                           id="password"
                           placeholder="Enter Password"
-                          onChange=""
                           onFocus={this.handleFocus}
                           onBlur={this.handleFocusOut}
+                          onChange={this.handleChange}
                           required
                         />
                         <div className="input-group-append">
@@ -144,13 +267,39 @@ class Home extends Component {
                     </div>
                     <div className="form-group">
                       <center>
-                        <button
-                          className="btn btn-success form-control my-3"
-                          type="submit"
-                          name="login"
-                        >
-                          <span>Login </span>
-                        </button>
+                        {loadText ? (
+                          <button
+                            className="btn btn-secondary form-control my-3"
+                            type="button"
+                            disabled
+                            style={{ cursor: 'not-allowed' }}
+                          >
+                            <span className="spinner-border spinner-border-sm" />
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-success form-control my-3"
+                            type="submit"
+                            name="login"
+                          >
+                            <span>Login </span>
+                          </button>
+                        )}
+                        {withErrors ? (
+                          <div className="alert alert-danger fade show">
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="alert"
+                              onClick={() => {
+                                this.setState({ withErrors: false });
+                              }}
+                            >
+                              &times;
+                            </button>
+                            <strong>Error!</strong> {ErrMessage}
+                          </div>
+                        ) : null}
                       </center>
                     </div>
                   </form>
@@ -159,10 +308,17 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer withErrors={withErrors} />
       </>
     );
   }
 }
 
-export default Home;
+Home.propTypes = {
+  login: PropTypes.object.isRequired,
+  loginAction: PropTypes.func.isRequired,
+};
+
+const mapStateFromProps = ({ login }) => ({ login });
+
+export default connect(mapStateFromProps, { loginAction })(withRouter(Home));
