@@ -1,0 +1,256 @@
+body {
+  background-color: #2f3d51 !important;
+}
+
+.wrapper {
+  background-color: #2f3d51;
+  min-height: 100vh !important;
+  position: relative;
+}
+
+.indicators {
+  padding-top: 90px;
+}
+
+.home {
+  padding-top: 30px;
+}
+
+.btn-danger {
+  display: inline-block;
+  border-radius: 2px;
+  background: #000 !important;
+  box-shadow: 0 2px 3px rgba(11, 11, 11, 0.8);
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  padding-top: 2px;
+  width: 175px;
+  height: 40px;
+  transition: all 0.6s !important;
+  cursor: pointer;
+  padding-top: 8px;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 4px 6px rgba(11, 11, 11, 0.8);
+  text-decoration: none;
+}
+
+.btn-danger:focus {
+  background: #000 !important;
+  border: none !important;
+  color: #f2f2f2;
+  box-shadow: 0 2px 3px rgba(11, 11, 11, 0.8);
+  outline: none !important;
+}
+
+.not-found-pic {
+  max-width: 100%;
+}
+
+h2.header-w3ls {
+  font-size: 7em;
+  text-align: center;
+  color: #000;
+  padding: 0.3em 0 0;
+  position: absolute;
+  top: -6px;
+  left: 42%;
+}
+
+.w3layouts-image {
+  position: relative;
+}
+
+.w3layouts-image img {
+  max-width: 100%;
+}
+
+.indicators h3 {
+  color: #000;
+  font-family: Lobster;
+  font-size: 30px;
+}
+
+.header {
+  padding-top: 28px;
+  padding-left: 45px;
+}
+
+.logo {
+  color: #9199a6 !important;
+  font-size: 26px;
+  text-shadow: 0 0 1px rgba(128, 128, 128, 0.8);
+  font-family: Asap !important;
+  font-style: oblique;
+}
+
+.logo span.fat {
+  color: #5d6a7d;
+}
+
+.header-icon {
+  font-size: 32px;
+  color: #9199a6 !important;
+}
+
+@media screen and (max-width: 992px) {
+  h2.header-w3ls {
+    top: 15px;
+    font-size: 5.7em;
+  }
+  .header {
+    padding-top: 40px;
+    padding-left: 0px;
+    text-align: center !important;
+  }
+  .logo {
+    font-size: 28px;
+  }
+  .header-icon {
+    font-size: 30px;
+  }
+  .indicators {
+    padding-top: 140px;
+  }
+
+  .home {
+    padding-top: 100px;
+  }
+}
+@media screen and (max-width: 900px) {
+  h2.header-w3ls {
+    top: -13px;
+    font-size: 5.2em;
+  }
+}
+@media screen and (max-width: 768px) {
+  h2.header-w3ls {
+    top: 14px;
+    left: 40%;
+  }
+  .header {
+    padding-top: 40px;
+    padding-left: 0px;
+    text-align: center !important;
+  }
+  .logo {
+    font-size: 30px;
+  }
+  .header-icon {
+    font-size: 36px;
+  }
+  .indicators {
+    padding-top: 80px;
+  }
+
+  .home {
+    padding-top: 50px;
+  }
+  .btn-danger {
+    font-size: 16px;
+    width: 175px;
+  }
+  .indicators h3 {
+    font-size: 25px !important;
+  }
+}
+@media screen and (max-width: 667px) {
+  h2.header-w3ls {
+    top: -17px;
+    left: 32%;
+  }
+}
+@media screen and (max-width: 640px) {
+  h2.header-w3ls {
+    font-size: 5em;
+  }
+}
+@media screen and (max-width: 576px) {
+  h2.header-w3ls {
+    font-size: 4em;
+    top: 10px;
+    left: 40%;
+  }
+  .header {
+    padding-top: 40px;
+    padding-left: 0px;
+    text-align: center !important;
+  }
+  .logo {
+    font-size: 26px;
+  }
+  .header-icon {
+    font-size: 32px;
+  }
+  .indicators {
+    padding-top: 80px;
+  }
+
+  .home {
+    padding-top: 50px;
+  }
+  .btn-danger {
+    font-size: 14px;
+    width: 170px;
+    padding-top: 11px;
+  }
+  .indicators h3 {
+    font-size: 22px !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  h2.header-w3ls {
+    font-size: 4em;
+    top: -5px;
+    left: 37%;
+  }
+}
+@media screen and (max-width: 414px) {
+  h2.header-w3ls {
+    font-size: 4em;
+    top: -9px;
+    left: 34%;
+  }
+}
+@media screen and (max-width: 384px) {
+  h2.header-w3ls {
+    font-size: 3.8em;
+    top: -12px;
+    left: 34%;
+  }
+}
+@media screen and (max-width: 320px) {
+  h2.header-w3ls {
+    font-size: 3.5em;
+    top: -14px;
+  }
+  .header {
+    padding-top: 40px;
+    padding-left: 0px;
+    text-align: center !important;
+  }
+  .logo {
+    font-size: 26px;
+  }
+  .header-icon {
+    font-size: 32px;
+  }
+  .indicators {
+    padding-top: 120px;
+  }
+
+  .home {
+    padding-top: 90px;
+  }
+  .btn-danger {
+    font-size: 14px;
+    width: 170px;
+    padding-top: 12px;
+  }
+  .indicators h3 {
+    font-size: 20px !important;
+  }
+}

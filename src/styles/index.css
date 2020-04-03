@@ -24,9 +24,40 @@ a {
   transition: all 0.6s !important;
 }
 
+button:focus {
+  outline: none !important;
+}
+
+button.btn-secondary span {
+  display: block !important;
+  /* background: #2f3d51 !important; */
+  color: #60d1c1 !important;
+  text-align: center !important;
+  width: 20px;
+  height: 20px;
+  border-radius: 50% !important;
+  margin: auto;
+}
+
+button.btn-secondary {
+  border-radius: 40px;
+  box-shadow: 0 0 0px rgba(47, 61, 81, 0.8);
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 20px !important;
+  width: 50%;
+  height: 45px;
+  transition: all 0.6s !important;
+  cursor: pointer;
+}
+
 button.btn-success {
   display: inline-block;
   border-radius: 40px;
+  background: -moz-linear-gradient(#5fd1c1, #1ca48c) !important;
+  background: -webkit-linear-gradient(#5fd1c1, #1ca48c) !important;
+  background: -o-linear-gradient(#5fd1c1, #1ca48c) !important;
   background: linear-gradient(#5fd1c1, #1ca48c);
   box-shadow: 0 0 0px rgba(47, 61, 81, 0.8);
   border: none;
@@ -45,10 +76,14 @@ button.btn-success:hover {
 }
 
 button.btn-success:focus {
-  background: linear-gradient(#5fd1c1, #1ca48c);
+  background: -moz-linear-gradient(#5fd1c1, #1ca48c) !important;
+  background: -webkit-linear-gradient(#5fd1c1, #1ca48c) !important;
+  background: -o-linear-gradient(#5fd1c1, #1ca48c) !important;
+  background: linear-gradient(#5fd1c1, #1ca48c) !important;
   border: none !important;
   color: #f2f2f2;
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.9) !important;
+  outline: none !important;
 }
 
 button.btn-success span {
@@ -391,7 +426,7 @@ button.btn-success:hover span:after {
   padding-left: 5px;
   height: 35px !important;
   font-style: italic;
-  transition: all 0.4s;
+  transition: all 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   padding-bottom: 15px;
 }
 
@@ -510,6 +545,10 @@ button.btn-success:hover span:after {
     width: 50%;
   }
 
+  .user-login form button.btn-secondary {
+    width: 50%;
+  }
+
   .user-login form input[type='email'],
   .user-login input[type='password'],
   .user-login input[type='text'] {
@@ -559,6 +598,10 @@ button.btn-success:hover span:after {
     width: 60%;
   }
 
+  .user-login form button.btn-secondary {
+    width: 60%;
+  }
+
   .user-login form input[type='email'],
   .user-login input[type='password'],
   .user-login input[type='text'] {
@@ -579,6 +622,14 @@ footer.mt-5 {
 
 footer.studentmt-5 {
   margin-top: 149px !important;
+}
+
+footer.with-errors {
+  margin-top: 40px !important;
+}
+
+footer.std-with-errors {
+  margin-top: 99px !important;
 }
 
 .foot-divider {
@@ -654,6 +705,14 @@ footer .copyright span.develop a:hover {
     margin-top: 30.7% !important;
   }
 
+  footer.with-errors {
+    margin-top: 19% !important;
+  }
+
+  footer.std-with-errors {
+    margin-top: 23.7% !important;
+  }
+
   .foot-divider {
     width: 85%;
     margin: 2px auto 15px auto;
@@ -671,6 +730,14 @@ footer .copyright span.develop a:hover {
   }
 
   footer.studentmt-5 {
+    margin-top: 99px !important;
+  }
+
+  footer.with-errors {
+    margin-top: 40px !important;
+  }
+
+  footer.std-with-errors {
     margin-top: 99px !important;
   }
 
@@ -699,6 +766,14 @@ footer .copyright span.develop a:hover {
   }
 
   footer.studentmt-5 {
+    margin-top: 99px !important;
+  }
+
+  footer.with-errors {
+    margin-top: 40px !important;
+  }
+
+  footer.std-with-errors {
     margin-top: 99px !important;
   }
 
@@ -742,6 +817,14 @@ footer .copyright span.develop a:hover {
   }
 
   footer.studentmt-5 {
+    margin-top: 99px !important;
+  }
+
+  footer.with-errors {
+    margin-top: 40px !important;
+  }
+
+  footer.std-with-errors {
     margin-top: 99px !important;
   }
 

@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WelcomeNav2 from '../components/WelcomeNav2';
 import Footer from '../components/Footer';
+// import '../styles/index.css';
 
 class Home extends Component {
   state = {

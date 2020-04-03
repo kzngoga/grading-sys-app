@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
@@ -5,9 +6,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 const date = new Date();
-const Footer = ({ compt }) => (
+const Footer = ({ compt, withErrors }) => (
   <>
-    <footer className={compt === 'student' ? 'studentmt-5' : 'mt-5'}>
+    <footer
+      className={
+        compt === 'student'
+          ? withErrors
+            ? 'std-with-errors'
+            : 'studentmt-5'
+          : withErrors
+          ? 'with-errors'
+          : 'mt-5'
+      }
+    >
       <div className="container-fluid">
         <div className="other-links">
           <div className="row">
@@ -88,6 +99,7 @@ const Footer = ({ compt }) => (
 
 Footer.propTypes = {
   compt: PropTypes.string.isRequired,
+  withErrors: PropTypes.string.isRequired,
 };
 
 export default Footer;
