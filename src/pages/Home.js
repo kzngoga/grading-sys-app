@@ -10,7 +10,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import WelcomeNav from '../components/WelcomeNav';
 import Footer from '../components/Footer';
@@ -24,13 +24,23 @@ class Home extends Component {
     email: '',
     password: '',
     loadText: false,
-    isSubmitted: false,
     withErrors: false,
     ErrMessage: '',
+    isLoggedIn: false,
+    loggedInData: {},
   };
 
   componentDidMount() {
     document.title = 'Admin / D.O.S Login | Grader';
+    const loggedInToken = localStorage.getItem('AdminToken');
+    const loggedInData = localStorage.getItem('AdminData');
+
+    if (loggedInToken || loggedInData) {
+      this.setState({
+        isLoggedIn: true,
+        loggedInData: JSON.parse(loggedInData),
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,7 +50,6 @@ class Home extends Component {
         email: '',
         password: '',
         loadText: false,
-        isSubmitted: true,
         withErrors: false,
       });
 
@@ -50,7 +59,7 @@ class Home extends Component {
         const firstToken = localStorage.getItem('AdminToken');
         const firstData = localStorage.getItem('AdminData');
 
-        if (!firstToken || !firstData) {
+        if (firstToken || firstData) {
           // Remove any token or data saved before
           localStorage.removeItem('AdminData');
           localStorage.removeItem('AdminToken');
@@ -71,7 +80,7 @@ class Home extends Component {
         const firstToken = localStorage.getItem('DosToken');
         const firstData = localStorage.getItem('DosData');
 
-        if (!firstToken || !firstData) {
+        if (firstToken || firstData) {
           // Remove any token or data saved before
           localStorage.removeItem('DosData');
           localStorage.removeItem('DosToken');
@@ -95,7 +104,7 @@ class Home extends Component {
         this.setState({
           withErrors: true,
           loadText: false,
-          isSubmitted: true,
+          isLoggedIn: false,
           ErrMessage: 'Ooops, An error Occured!',
         });
       }
@@ -103,7 +112,7 @@ class Home extends Component {
         return this.setState({
           loadText: false,
           withErrors: true,
-          isSubmitted: true,
+          isLoggedIn: false,
           ErrMessage: 'Email does not exist!',
         });
       }
@@ -111,7 +120,7 @@ class Home extends Component {
         return this.setState({
           loadText: false,
           withErrors: true,
-          isSubmitted: true,
+          isLoggedIn: false,
           ErrMessage: 'Password is Incorrect!',
         });
       }
@@ -145,6 +154,20 @@ class Home extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  handleCloseAlert = () => {
+    const loggedInToken = localStorage.getItem('AdminToken');
+    const loggedInData = localStorage.getItem('AdminData');
+
+    if (loggedInToken || loggedInData) {
+      this.setState({
+        isLoggedIn: true,
+        withErrors: false,
+      });
+    } else {
+      this.setState({ withErrors: false });
+    }
+  };
+
   render() {
     const date = new Date();
     const time = date.getHours();
@@ -168,13 +191,14 @@ class Home extends Component {
       isPasswordShown,
       isFocused,
       loadText,
-      isSubmitted,
       ErrMessage,
       withErrors,
+      isLoggedIn,
+      loggedInData,
     } = this.state;
     const togglEye = isPasswordShown ? 'eye-slash' : 'eye';
     const slashColor = isPasswordShown ? '#1ca48c' : '#9199a6';
-
+    console.log(isLoggedIn);
     return (
       <>
         <WelcomeNav compt="home" />
@@ -291,14 +315,28 @@ class Home extends Component {
                               type="button"
                               className="close"
                               data-dismiss="alert"
-                              onClick={() => {
-                                this.setState({ withErrors: false });
-                              }}
+                              onClick={this.handleCloseAlert}
                             >
                               &times;
                             </button>
                             <strong>Error!</strong> {ErrMessage}
                           </div>
+                        ) : null}
+
+                        {isLoggedIn ? (
+                          <p className="mt-2 logged-in" style={{ color: '#60d1c1' }}>
+                            Or Login as{' '}
+                            <Link
+                              to="/admin/home"
+                              style={{
+                                color: '#9199a6',
+                                fontWeight: 'bold',
+                                textDecoration: 'underline',
+                              }}
+                            >
+                              {`${loggedInData.lastname} ${loggedInData.firstname}`}
+                            </Link>
+                          </p>
                         ) : null}
                       </center>
                     </div>
@@ -308,7 +346,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Footer withErrors={withErrors} />
+        <Footer withErrors={withErrors} compt="home" isLoggedIn={isLoggedIn} />
       </>
     );
   }

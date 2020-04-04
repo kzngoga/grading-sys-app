@@ -1,21 +1,21 @@
-import { USER_LOGIN_SUCCESS, USER_LOGIN_FAILED } from '../../actionTypes';
+import { TCHR_LOGIN_SUCCESS, TCHR_LOGIN_FAILED } from '../../actionTypes';
 
 const initialState = {
   status: '',
   message: '',
-  userData: {},
+  teacherData: {},
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOGIN_SUCCESS:
+    case TCHR_LOGIN_SUCCESS:
       return {
         ...state,
         status: 'success',
         message: action.message,
-        userData: action.userData,
+        teacherData: action.teacherData,
       };
-    case USER_LOGIN_FAILED:
+    case TCHR_LOGIN_FAILED:
       return { ...state, status: 'error', error: action.error };
     default:
       return state;

@@ -8,6 +8,7 @@ import store from './redux/store';
 import Home from './pages/Home';
 import AdminHome from './pages/admin/Home';
 import DosHome from './pages/dos/Home';
+import TeacherHome from './pages/teacher/Home';
 import SuperAdmin from './pages/SuperAdmin';
 import StudentLogin from './pages/StudentLogin';
 import TeacherLogin from './pages/TeacherLogin';
@@ -25,6 +26,7 @@ const App = () => (
         <Route exact path="/teacher-login" component={TeacherLogin} />
         <Route exact path="/admin/home" component={AdminHome} />
         <Route exact path="/dos/home" component={DosHome} />
+        <Route exact path="/teacher/home" component={TeacherHome} />
         <Route path="/*" component={NotFound} />
       </Switch>
     </Router>
