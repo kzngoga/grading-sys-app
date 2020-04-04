@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import axios from '..';
-import { USER_LOGIN_SUCCESS, USER_LOGIN_FAILED } from '../../actionTypes';
+import { TCHR_LOGIN_SUCCESS, TCHR_LOGIN_FAILED } from '../../actionTypes';
 
-const loginAction = (payload) => async (dispatch) => {
+const teacherLoginAction = (payload) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/v1/user/login', payload, {
+    const response = await axios.post('/api/v1/teacher/login', payload, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -13,9 +13,9 @@ const loginAction = (payload) => async (dispatch) => {
       data: { message, data },
     } = response;
     dispatch({
-      type: USER_LOGIN_SUCCESS,
+      type: TCHR_LOGIN_SUCCESS,
       message,
-      userData: data,
+      teacherData: data,
     });
   } catch (err) {
     let error = {};
@@ -31,10 +31,10 @@ const loginAction = (payload) => async (dispatch) => {
       };
     }
     dispatch({
-      type: USER_LOGIN_FAILED,
+      type: TCHR_LOGIN_FAILED,
       error,
     });
   }
 };
 
-export default loginAction;
+export default teacherLoginAction;

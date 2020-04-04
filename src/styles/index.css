@@ -632,6 +632,14 @@ footer.std-with-errors {
   margin-top: 99px !important;
 }
 
+footer.logged {
+  margin-top: 60px !important;
+}
+
+footer.loggedStd {
+  margin-top: 119px !important;
+}
+
 .foot-divider {
   width: 85%;
   margin: 2px auto 15px auto;
@@ -713,6 +721,14 @@ footer .copyright span.develop a:hover {
     margin-top: 23.7% !important;
   }
 
+  footer.logged {
+    margin-top: 23% !important;
+  }
+
+  footer.loggedStd {
+    margin-top: 27.7% !important;
+  }
+
   .foot-divider {
     width: 85%;
     margin: 2px auto 15px auto;
@@ -741,6 +757,14 @@ footer .copyright span.develop a:hover {
     margin-top: 99px !important;
   }
 
+  footer.logged {
+    margin-top: 40px !important;
+  }
+
+  footer.loggedStd {
+    margin-top: 99px !important;
+  }
+
   .foot-divider {
     width: 90%;
   }
@@ -753,6 +777,9 @@ footer .copyright span.develop a:hover {
 
   footer .follow .foot-icon:hover {
     opacity: 1;
+  }
+  .logged-in {
+    font-size: 16px;
   }
 }
 
@@ -774,6 +801,14 @@ footer .copyright span.develop a:hover {
   }
 
   footer.std-with-errors {
+    margin-top: 99px !important;
+  }
+
+  footer.logged {
+    margin-top: 40px !important;
+  }
+
+  footer.loggedStd {
     margin-top: 99px !important;
   }
 
@@ -805,6 +840,9 @@ footer .copyright span.develop a:hover {
   footer .copyright span.develop a {
     font-size: 12px;
   }
+  .logged-in {
+    font-size: 15px;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -825,6 +863,14 @@ footer .copyright span.develop a:hover {
   }
 
   footer.std-with-errors {
+    margin-top: 99px !important;
+  }
+
+  footer.logged {
+    margin-top: 40px !important;
+  }
+
+  footer.loggedStd {
     margin-top: 99px !important;
   }
 
@@ -854,5 +900,9 @@ footer .copyright span.develop a:hover {
 
   footer .copyright span.develop a {
     font-size: 12px;
+  }
+
+  .logged-in {
+    font-size: 14px;
   }
 }
