@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import AdminHome from './pages/admin/Home';
 import DosHome from './pages/dos/Home';
 import TeacherHome from './pages/teacher/Home';
+import StudentHome from './pages/student/Home';
 import SuperAdmin from './pages/SuperAdmin';
 import StudentLogin from './pages/StudentLogin';
 import TeacherLogin from './pages/TeacherLogin';
@@ -21,12 +22,13 @@ const App = () => (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/super-admin" component={SuperAdmin} />
-        <Route exact path="/student-login" component={StudentLogin} />
-        <Route exact path="/teacher-login" component={TeacherLogin} />
-        <Route exact path="/admin/home" component={AdminHome} />
-        <Route exact path="/dos/home" component={DosHome} />
-        <Route exact path="/teacher/home" component={TeacherHome} />
+        <Route path="/super-admin" component={SuperAdmin} />
+        <Route path="/student-login" component={StudentLogin} />
+        <Route path="/teacher-login" component={TeacherLogin} />
+        <Route path="/admin/home" component={AdminHome} />
+        <Route path="/dos/home" component={DosHome} />
+        <Route path="/teacher/home" component={TeacherHome} />
+        <Route path="/student/home" component={StudentHome} />
         <Route path="/*" component={NotFound} />
       </Switch>
     </Router>
