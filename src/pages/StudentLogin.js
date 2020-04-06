@@ -5,12 +5,128 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WelcomeNav from '../components/WelcomeNav';
 import Footer from '../components/Footer';
-// import '../styles/index.css';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import '../styles/index.css';
+import studentLoginAction from '../redux/actions/student/studentLogin';
 
-class Home extends Component {
+class StudentLogin extends Component {
+  state = {
+    regNum: '',
+    loadText: false,
+    withErrors: false,
+    ErrMessage: '',
+    isLoggedIn: false,
+    loggedInData: {},
+  };
+
   componentDidMount() {
     document.title = 'Student Login | Grader';
+    const loggedInToken = localStorage.getItem('StudentToken');
+    const loggedInData = localStorage.getItem('StudentData');
+
+    if (loggedInToken || loggedInData) {
+      this.setState({
+        isLoggedIn: true,
+        loggedInData: JSON.parse(loggedInData),
+      });
+    }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { studentLogin } = nextProps;
+    if (studentLogin.status === 'success') {
+      this.setState({
+        regNum: '',
+        loadText: false,
+        withErrors: false,
+      });
+
+      this.props.history.push('/student/home');
+      // Check if there is any token or data saved before
+      const firstToken = localStorage.getItem('StudentToken');
+      const firstData = localStorage.getItem('StudentData');
+
+      if (firstToken || firstData) {
+        // Remove any token or data saved before
+        localStorage.removeItem('StudentData');
+        localStorage.removeItem('StudentToken');
+
+        // Add new token or data
+        localStorage.setItem('StudentToken', studentLogin.studentData.token);
+        localStorage.setItem(
+          'StudentData',
+          JSON.stringify(studentLogin.studentData)
+        );
+      } else {
+        // Add new token or data
+        localStorage.setItem('StudentToken', studentLogin.studentData.token);
+        localStorage.setItem(
+          'StudentData',
+          JSON.stringify(studentLogin.studentData)
+        );
+      }
+    }
+
+    if (studentLogin.status === 'error') {
+      const {
+        error: { status },
+      } = studentLogin;
+      if (status === 500) {
+        this.setState({
+          withErrors: true,
+          loadText: false,
+          isLoggedIn: false,
+          ErrMessage: 'Ooops, An error Occured!',
+        });
+      }
+      if (status === 404) {
+        return this.setState({
+          loadText: false,
+          withErrors: true,
+          isLoggedIn: false,
+          ErrMessage: 'Reg. N0 does not exist!',
+        });
+      }
+      if (status === 400) {
+        return this.setState({
+          loadText: false,
+          withErrors: true,
+          isLoggedIn: false,
+          ErrMessage: 'Password is Incorrect!',
+        });
+      }
+    }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { studentLoginAction: studentLogin } = this.props;
+    this.setState({
+      loadText: true,
+    });
+    const { regNum } = this.state;
+    return studentLogin({ regNum });
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  handleCloseAlert = () => {
+    const loggedInToken = localStorage.getItem('StudentToken');
+    const loggedInData = localStorage.getItem('StudentData');
+
+    if (loggedInToken || loggedInData) {
+      this.setState({
+        isLoggedIn: true,
+        withErrors: false,
+      });
+    } else {
+      this.setState({ withErrors: false });
+    }
+  };
 
   render() {
     const date = new Date();
@@ -30,6 +146,14 @@ class Home extends Component {
       message = 'Good Night';
       icon = 'moon';
     }
+
+    const {
+      loadText,
+      ErrMessage,
+      withErrors,
+      isLoggedIn,
+      loggedInData,
+    } = this.state;
 
     return (
       <>
@@ -58,7 +182,7 @@ class Home extends Component {
                 <div className="user-login mt-4">
                   <form
                     method=""
-                    onSubmit=""
+                    onSubmit={this.handleSubmit}
                     autoComplete="off"
                     className="py-3 px-4"
                   >
@@ -80,23 +204,66 @@ class Home extends Component {
                     <div className="form-group">
                       <input
                         type="text"
-                        id="regnum"
+                        id="regNum"
                         className="form-control"
                         placeholder="Enter Reg NO."
-                        onChange=""
+                        onChange={this.handleChange}
                         required
                       />
                     </div>
 
                     <div className="form-group">
                       <center>
-                        <button
-                          className="btn btn-success form-control my-3"
-                          type="submit"
-                          name="login"
-                        >
-                          <span>Login </span>
-                        </button>
+                        {loadText ? (
+                          <button
+                            className="btn btn-secondary form-control my-3"
+                            type="button"
+                            disabled
+                            style={{ cursor: 'not-allowed' }}
+                          >
+                            <span className="spinner-border spinner-border-sm" />
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-success form-control my-3"
+                            type="submit"
+                            name="login"
+                          >
+                            <span>Login </span>
+                          </button>
+                        )}
+                        {withErrors ? (
+                          <div className="alert alert-danger fade show">
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="alert"
+                              onClick={this.handleCloseAlert}
+                            >
+                              &times;
+                            </button>
+                            <strong>Error!</strong> {ErrMessage}
+                          </div>
+                        ) : null}
+
+                        {isLoggedIn ? (
+                          <p
+                            className="mt-2 logged-in"
+                            style={{ color: '#60d1c1' }}
+                          >
+                            Or Login as{' '}
+                            <Link
+                              to="/student/home"
+                              style={{
+                                color: '#9199a6',
+                                fontWeight: 'bold',
+                                textDecoration: 'underline',
+                              }}
+                            >
+                              {`${loggedInData.lastname} ${loggedInData.firstname}`}
+                            </Link>
+                          </p>
+                        ) : null}
                       </center>
                     </div>
                   </form>
@@ -105,10 +272,23 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Footer compt="student" />
+        <Footer
+          compt="student"
+          withErrors={withErrors}
+          isLoggedIn={isLoggedIn}
+        />
       </>
     );
   }
 }
 
-export default Home;
+StudentLogin.propTypes = {
+  studentLogin: PropTypes.object.isRequired,
+  studentLoginAction: PropTypes.func.isRequired,
+};
+
+const mapStateFromProps = ({ studentLogin }) => ({ studentLogin });
+
+export default connect(mapStateFromProps, { studentLoginAction })(
+  withRouter(StudentLogin)
+);

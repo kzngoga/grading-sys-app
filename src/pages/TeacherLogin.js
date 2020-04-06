@@ -18,7 +18,7 @@ import Footer from '../components/Footer';
 import '../styles/index.css';
 import teacherLoginAction from '../redux/actions/teacher/teacherLogin';
 
-class teacherLogin extends Component {
+class TeacherLogin extends Component {
   state = {
     isPasswordShown: false,
     isFocused: false,
@@ -59,7 +59,7 @@ class teacherLogin extends Component {
       const firstToken = localStorage.getItem('TeacherToken');
       const firstData = localStorage.getItem('TeacherData');
 
-      if (!firstToken === '' || !firstData === '') {
+      if (firstToken || firstData) {
         // Remove any token or data saved before
         localStorage.removeItem('TeacherData');
         localStorage.removeItem('TeacherToken');
@@ -344,7 +344,7 @@ class teacherLogin extends Component {
   }
 }
 
-teacherLogin.propTypes = {
+TeacherLogin.propTypes = {
   teacherLogin: PropTypes.object.isRequired,
   teacherLoginAction: PropTypes.func.isRequired,
 };
@@ -352,5 +352,5 @@ teacherLogin.propTypes = {
 const mapStateFromProps = ({ teacherLogin }) => ({ teacherLogin });
 
 export default connect(mapStateFromProps, { teacherLoginAction })(
-  withRouter(teacherLogin)
+  withRouter(TeacherLogin)
 );
