@@ -6,6 +6,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import store from './redux/store';
 import Home from './pages/Home';
+import SuperAdminHome from './pages/spAdmin/Home';
 import AdminHome from './pages/admin/Home';
 import DosHome from './pages/dos/Home';
 import TeacherHome from './pages/teacher/Home';
@@ -22,9 +23,10 @@ const App = () => (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/super-admin" component={SuperAdmin} />
-        <Route path="/student-login" component={StudentLogin} />
-        <Route path="/teacher-login" component={TeacherLogin} />
+        <Route path="/super/admin/login" component={SuperAdmin} />
+        <Route path="/student/login" component={StudentLogin} />
+        <Route path="/teacher/login" component={TeacherLogin} />
+        <Route path="/super/admin/home" component={SuperAdminHome} />
         <Route path="/admin/home" component={AdminHome} />
         <Route path="/dos/home" component={DosHome} />
         <Route path="/teacher/home" component={TeacherHome} />

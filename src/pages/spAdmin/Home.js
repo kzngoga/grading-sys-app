@@ -11,45 +11,44 @@ import { Redirect, Link } from 'react-router-dom';
 class Home extends Component {
   state = {
     redirect: false,
-    studentData: {},
+    spAdminData: {},
   };
 
   componentDidMount() {
-    const StudentToken = localStorage.getItem('StudentToken');
-    const StudentData = localStorage.getItem('StudentData');
+    const SpAdminToken = localStorage.getItem('SpAdminToken');
+    const SpAdminData = localStorage.getItem('SpAdminData');
 
-    if (!StudentToken || !StudentData) {
+    if (!SpAdminToken || !SpAdminData) {
       alert('Please Login to continue!');
       this.setState({ redirect: true });
     } else {
-      this.setState({ studentData: JSON.parse(StudentData) });
+      this.setState({ spAdminData: JSON.parse(SpAdminData) });
     }
 
-    document.title = 'Student Homepage | Grader';
+    document.title = 'Super Admin Homepage | Grader';
   }
 
   handleLogout = () => {
-    localStorage.removeItem('StudentData');
-    localStorage.removeItem('StudentToken');
+    localStorage.removeItem('SpAdminData');
+    localStorage.removeItem('SpAdminToken');
   };
 
   render() {
-    const { redirect, studentData } = this.state;
+    const { redirect, spAdminData } = this.state;
     if (redirect) {
-      return <Redirect to="/student/login" />;
+      return <Redirect to="/super/admin/login" />;
     }
 
     return (
       <div>
-        <h2 className="text-center mb-4">Student-Dashboard</h2>
-        <h3>
-          Hello
-          {` ${studentData.lastname} `}
-          {` ${studentData.firstname} `}
-        </h3>
-        <p>Logged in as Student</p>
+        <h2 className="text-center mb-4">Super-Admin-Dashboard</h2>
+        <h4>Hello Super Admin</h4>
+        <p>
+          Logged in as
+          {` ${spAdminData.role} `}
+        </p>
         <Link
-          to="/student/login"
+          to="/super/admin/login"
           className="pad-link-text text-light btn btn-success"
           onClick={this.handleLogout}
         >
