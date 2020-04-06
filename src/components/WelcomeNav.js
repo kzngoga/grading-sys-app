@@ -30,7 +30,7 @@ const WelcomeNav = ({ compt }) => (
           {compt === 'home' ? (
             <>
               <li className="nav-item">
-                <Link className="nav-link mr-3 first-link" to="/teacher-login">
+                <Link className="nav-link mr-3 first-link" to="/teacher/login">
                   <span className="mr-2 nav-icon">
                     <FontAwesomeIcon icon={['fas', 'chalkboard-teacher']} />
                   </span>
@@ -38,7 +38,7 @@ const WelcomeNav = ({ compt }) => (
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mr-3" to="/student-login">
+                <Link className="nav-link mr-3" to="/student/login">
                   <span className="mr-2 nav-icon">
                     <FontAwesomeIcon icon={['fas', 'user-graduate']} />
                   </span>
@@ -61,7 +61,7 @@ const WelcomeNav = ({ compt }) => (
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mr-3" to="/student-login">
+                <Link className="nav-link mr-3" to="/student/login">
                   <span className="mr-2 nav-icon">
                     <FontAwesomeIcon icon={['fas', 'user-graduate']} />
                   </span>
@@ -84,7 +84,7 @@ const WelcomeNav = ({ compt }) => (
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mr-3" to="/teacher-login">
+                <Link className="nav-link mr-3" to="/teacher/login">
                   <span className="mr-2 nav-icon">
                     <FontAwesomeIcon icon={['fas', 'chalkboard-teacher']} />
                   </span>

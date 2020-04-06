@@ -3,19 +3,85 @@
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import WelcomeNav2 from '../components/WelcomeNav2';
 import Footer from '../components/Footer';
-// import '../styles/index.css';
+import '../styles/index.css';
+import spAdminLoginAction from '../redux/actions/spAdmin/spAdminLogin';
 
-class Home extends Component {
+class SuperAdmin extends Component {
   state = {
     isPasswordShown: false,
     isFocused: false,
+    username: '',
+    password: '',
+    loadText: false,
+    withErrors: false,
+    ErrMessage: '',
   };
 
   componentDidMount() {
-    document.title = 'Admin / D.O.S Login | Grader';
+    document.title = 'Super Admin Login | Grader';
+    const loggedInToken = localStorage.getItem('SpAdminToken');
+    const loggedInData = localStorage.getItem('SpAdminData');
+
+    if (loggedInToken || loggedInData) {
+      this.props.history.push('/super/admin/home');
+    }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { spAdminLogin } = nextProps;
+    if (spAdminLogin.status === 'success') {
+      this.setState({
+        email: '',
+        password: '',
+        loadText: false,
+        withErrors: false,
+      });
+
+      this.props.history.push('/super/admin/home');
+      localStorage.setItem('SpAdminToken', spAdminLogin.spAdminData.token);
+      localStorage.setItem(
+        'SpAdminData',
+        JSON.stringify(spAdminLogin.spAdminData)
+      );
+    }
+
+    if (spAdminLogin.status === 'error') {
+      const {
+        error: { status },
+      } = spAdminLogin;
+      if (status === 500) {
+        this.setState({
+          withErrors: true,
+          loadText: false,
+          isLoggedIn: false,
+          ErrMessage: 'Ooops, An error Occured!',
+        });
+      }
+      if (status === 400) {
+        return this.setState({
+          loadText: false,
+          withErrors: true,
+          isLoggedIn: false,
+          ErrMessage: 'Invalid Username / Password!',
+        });
+      }
+    }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { spAdminLoginAction: spAdminLogin } = this.props;
+    this.setState({
+      loadText: true,
+    });
+    const { username, password } = this.state;
+    return spAdminLogin({ username, password });
+  };
 
   showPassword = () => {
     const { isPasswordShown } = this.state;
@@ -28,6 +94,14 @@ class Home extends Component {
 
   handleFocusOut = () => {
     this.setState({ isFocused: false });
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  handleCloseAlert = () => {
+    this.setState({ withErrors: false });
   };
 
   render() {
@@ -49,10 +123,16 @@ class Home extends Component {
       icon = 'moon';
     }
 
-    const { isPasswordShown, isFocused } = this.state;
+    const {
+      isPasswordShown,
+      isFocused,
+      loadText,
+      ErrMessage,
+      withErrors,
+    } = this.state;
     const togglEye = isPasswordShown ? 'eye-slash' : 'eye';
     const slashColor = isPasswordShown ? '#1ca48c' : '#9199a6';
-
+    console.log(this.props.spAdminLogin);
     return (
       <>
         <WelcomeNav2 compt="home" />
@@ -80,7 +160,7 @@ class Home extends Component {
                 <div className="user-login mt-4">
                   <form
                     method=""
-                    onSubmit=""
+                    onSubmit={this.handleSubmit}
                     autoComplete="off"
                     className="py-3 px-4"
                   >
@@ -102,11 +182,11 @@ class Home extends Component {
                     <div className="form-underline" />
                     <div className="form-group">
                       <input
-                        type="email"
-                        id="email"
+                        type="text"
+                        id="username"
                         className="form-control"
-                        placeholder="Enter Email"
-                        onChange=""
+                        placeholder="Enter Username"
+                        onChange={this.handleChange}
                         required
                       />
                     </div>
@@ -117,7 +197,7 @@ class Home extends Component {
                           type={isPasswordShown ? 'text' : 'password'}
                           id="password"
                           placeholder="Enter Password"
-                          onChange=""
+                          onChange={this.handleChange}
                           onFocus={this.handleFocus}
                           onBlur={this.handleFocusOut}
                           required
@@ -145,13 +225,37 @@ class Home extends Component {
                     </div>
                     <div className="form-group">
                       <center>
-                        <button
-                          className="btn btn-success form-control my-3"
-                          type="submit"
-                          name="login"
-                        >
-                          <span>Login </span>
-                        </button>
+                        {loadText ? (
+                          <button
+                            className="btn btn-secondary form-control my-3"
+                            type="button"
+                            disabled
+                            style={{ cursor: 'not-allowed' }}
+                          >
+                            <span className="spinner-border spinner-border-sm" />
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-success form-control my-3"
+                            type="submit"
+                            name="login"
+                          >
+                            <span>Login </span>
+                          </button>
+                        )}
+                        {withErrors ? (
+                          <div className="alert alert-danger fade show">
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="alert"
+                              onClick={this.handleCloseAlert}
+                            >
+                              &times;
+                            </button>
+                            <strong>Error!</strong> {ErrMessage}
+                          </div>
+                        ) : null}
                       </center>
                     </div>
                   </form>
@@ -160,10 +264,19 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer withErrors={withErrors} compt="spAdmin" />
       </>
     );
   }
 }
 
-export default Home;
+SuperAdmin.propTypes = {
+  spAdminLogin: PropTypes.object.isRequired,
+  spAdminLoginAction: PropTypes.func.isRequired,
+};
+
+const mapStateFromProps = ({ spAdminLogin }) => ({ spAdminLogin });
+
+export default connect(mapStateFromProps, { spAdminLoginAction })(
+  withRouter(SuperAdmin)
+);
