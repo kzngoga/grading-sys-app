@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-inner-declarations */
 /* eslint-disable consistent-return */
 /* eslint-disable react/state-in-constructor */
@@ -26,6 +27,10 @@ class Home extends Component {
     }
 
     document.title = 'Student Homepage | Grader';
+  }
+
+  componentWillUnmount() {
+    this.props.history.goForward();
   }
 
   handleLogout = () => {

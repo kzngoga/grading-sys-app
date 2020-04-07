@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable consistent-return */
@@ -27,18 +30,43 @@ class Home extends Component {
     withErrors: false,
     ErrMessage: '',
     isLoggedIn: false,
-    loggedInData: {},
+    isLoggedIn1: false,
+    loggedInData1: {},
+    isLoggedIn2: false,
+    loggedInData2: {},
+    bothLoggedIn: false,
   };
 
   componentDidMount() {
     document.title = 'Admin / D.O.S Login | Grader';
-    const loggedInToken = localStorage.getItem('AdminToken');
-    const loggedInData = localStorage.getItem('AdminData');
+    const loggedInToken1 = localStorage.getItem('AdminToken');
+    const loggedInData1 = localStorage.getItem('AdminData');
+    const loggedInToken2 = localStorage.getItem('DosToken');
+    const loggedInData2 = localStorage.getItem('DosData');
 
-    if (loggedInToken || loggedInData) {
+    if (loggedInToken1 || loggedInData1) {
       this.setState({
         isLoggedIn: true,
-        loggedInData: JSON.parse(loggedInData),
+        isLoggedIn1: true,
+        loggedInData1: JSON.parse(loggedInData1),
+      });
+    }
+    if (loggedInToken2 || loggedInData2) {
+      this.setState({
+        isLoggedIn: true,
+        isLoggedIn2: true,
+        loggedInData2: JSON.parse(loggedInData2),
+      });
+    }
+    if (
+      (loggedInToken1 || loggedInData1) &&
+      (loggedInToken2 || loggedInData2)
+    ) {
+      this.setState({
+        isLoggedIn: true,
+        bothLoggedIn: true,
+        loggedInData1: JSON.parse(loggedInData1),
+        loggedInData2: JSON.parse(loggedInData2),
       });
     }
   }
@@ -155,12 +183,32 @@ class Home extends Component {
   };
 
   handleCloseAlert = () => {
-    const loggedInToken = localStorage.getItem('AdminToken');
-    const loggedInData = localStorage.getItem('AdminData');
+    const loggedInToken1 = localStorage.getItem('AdminToken');
+    const loggedInData1 = localStorage.getItem('AdminData');
+    const loggedInToken2 = localStorage.getItem('DosToken');
+    const loggedInData2 = localStorage.getItem('DosData');
 
-    if (loggedInToken || loggedInData) {
+    if (loggedInToken1 || loggedInData1) {
       this.setState({
         isLoggedIn: true,
+        isLoggedIn1: true,
+        withErrors: false,
+      });
+    }
+    if (loggedInToken2 || loggedInData2) {
+      this.setState({
+        isLoggedIn: true,
+        isLoggedIn2: true,
+        withErrors: false,
+      });
+    }
+    if (
+      (loggedInToken1 || loggedInData1) &&
+      (loggedInToken2 || loggedInData2)
+    ) {
+      this.setState({
+        isLoggedIn: true,
+        bothLoggedIn: true,
         withErrors: false,
       });
     } else {
@@ -194,7 +242,10 @@ class Home extends Component {
       ErrMessage,
       withErrors,
       isLoggedIn,
-      loggedInData,
+      isLoggedIn1,
+      bothLoggedIn,
+      loggedInData1,
+      loggedInData2,
     } = this.state;
     const togglEye = isPasswordShown ? 'eye-slash' : 'eye';
     const slashColor = isPasswordShown ? '#1ca48c' : '#9199a6';
@@ -323,19 +374,80 @@ class Home extends Component {
                         ) : null}
 
                         {isLoggedIn ? (
-                          <p className="mt-2 logged-in" style={{ color: '#60d1c1' }}>
-                            Or Login as{' '}
-                            <Link
-                              to="/admin/home"
-                              style={{
-                                color: '#9199a6',
-                                fontWeight: 'bold',
-                                textDecoration: 'underline',
-                              }}
+                          bothLoggedIn ? (
+                            <p
+                              className="mt-2 logged-in"
+                              style={{ color: '#60d1c1' }}
                             >
-                              {`${loggedInData.lastname} ${loggedInData.firstname}`}
-                            </Link>
-                          </p>
+                              Or Login as{' '}
+                              <Link
+                                to="/admin/home"
+                                style={{
+                                  color: '#9199a6',
+                                  fontWeight: 'bold',
+                                  textDecoration: 'underline',
+                                }}
+                              >
+                                {`${loggedInData1.lastname.slice(
+                                  0,
+                                  1
+                                )}. ${loggedInData1.firstname.slice(0, 1)}. (${
+                                  loggedInData1.role
+                                }) `}
+                              </Link>
+                              {' / '}
+                              <Link
+                                to="/dos/home"
+                                style={{
+                                  color: '#9199a6',
+                                  fontWeight: 'bold',
+                                  textDecoration: 'underline',
+                                }}
+                                className="loggedin-dos-link"
+                              >
+                                {`${loggedInData2.lastname.slice(
+                                  0,
+                                  1
+                                )}. ${loggedInData2.firstname.slice(0, 1)}.  (${
+                                  loggedInData2.role
+                                }) `}
+                              </Link>
+                            </p>
+                          ) : isLoggedIn1 ? (
+                            <p
+                              className="mt-2 logged-in"
+                              style={{ color: '#60d1c1' }}
+                            >
+                              Or Login as{' '}
+                              <Link
+                                to="/admin/home"
+                                style={{
+                                  color: '#9199a6',
+                                  fontWeight: 'bold',
+                                  textDecoration: 'underline',
+                                }}
+                              >
+                                {`${loggedInData1.lastname} ${loggedInData1.firstname} (${loggedInData1.role})`}
+                              </Link>
+                            </p>
+                          ) : (
+                            <p
+                              className="mt-2 logged-in"
+                              style={{ color: '#60d1c1' }}
+                            >
+                              Or Login as{' '}
+                              <Link
+                                to="/dos/home"
+                                style={{
+                                  color: '#9199a6',
+                                  fontWeight: 'bold',
+                                  textDecoration: 'underline',
+                                }}
+                              >
+                                {`${loggedInData2.lastname} ${loggedInData2.firstname} (${loggedInData2.role})`}
+                              </Link>
+                            </p>
+                          )
                         ) : null}
                       </center>
                     </div>
