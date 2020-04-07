@@ -360,6 +360,9 @@ button.btn-success:hover span:after {
 }
 
 /* LOGIN AND SALUTE SECTION */
+.login-section {
+  margin-top: 87px;
+}
 
 /* Salute Section */
 .salute.mt-5 {
@@ -472,6 +475,10 @@ button.btn-success:hover span:after {
 }
 
 @media screen and (max-width: 768px) {
+  .login-section {
+    margin-top: 90px;
+  }
+
   .salute.mt-5 {
     margin-top: 50px !important;
   }
@@ -502,9 +509,16 @@ button.btn-success:hover span:after {
   .user-login form .form-underline {
     width: 13%;
   }
+  .loggedin-dos-link {
+    display: block !important;
+  }
 }
 
 @media screen and (max-width: 576px) {
+  .login-section {
+    margin-top: 80px;
+  }
+
   .salute.mt-5 {
     margin-top: 50px !important;
   }
@@ -560,9 +574,16 @@ button.btn-success:hover span:after {
   .user-login input[type='text']::placeholder {
     font-size: 14px;
   }
+  .loggedin-dos-link {
+    display: block !important;
+  }
 }
 
 @media screen and (max-width: 320px) {
+  .login-section {
+    margin-top: 80px;
+  }
+
   .salute.mt-5 {
     margin-top: 40px !important;
   }
@@ -612,6 +633,9 @@ button.btn-success:hover span:after {
   .user-login input[type='password']::placeholder,
   .user-login input[type='text']::placeholder {
     font-size: 14px;
+  }
+  .loggedin-dos-link {
+    display: block !important;
   }
 }
 

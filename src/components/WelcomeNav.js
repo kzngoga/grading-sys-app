@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 const WelcomeNav = ({ compt }) => (
-  <nav className="navbar navbar-expand-md navbar-dark main-nav p-3">
+  <nav className="navbar navbar-expand-md navbar-dark main-nav p-3 fixed-top">
     <div className="container">
       <Link to="/" className="navbar-brand text-uppercase font-weight-bold">
         <span className="logo-icon mr-1">
