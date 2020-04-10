@@ -1,9 +1,14 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
+import Avatar from './Avatar';
+import SmallNav from './SmallNav';
+import '../../styles/dash.css';
 
-const WelcomeNav2 = () => (
+const DashNav = ({ logout, userData }) => (
   <nav className="navbar navbar-expand-md navbar-dark main-nav p-3 fixed-top">
     <div className="container">
       <Link to="/" className="navbar-brand text-uppercase font-weight-bold">
@@ -25,19 +30,16 @@ const WelcomeNav2 = () => (
       </button>
 
       <div className="collapse navbar-collapse" id="collapseNav">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <Link className="nav-link mr-3" to="/">
-              <span className="mr-2 nav-icon">
-                <FontAwesomeIcon icon={['fas', 'home']} />
-              </span>
-              Go to Home
-            </Link>
-          </li>
-        </ul>
+        <Avatar logout={logout} userData={userData} />
+        <SmallNav logout={logout} userData={userData} />
       </div>
     </div>
   </nav>
 );
 
-export default WelcomeNav2;
+DashNav.propTypes = {
+  logout: PropTypes.func.isRequired,
+  userData: PropTypes.object.isRequired,
+};
+
+export default DashNav;
