@@ -1,8 +1,38 @@
 /* IMPORTANT */
+.invalid {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 .btn-dark {
   background-color: #2f3d51 !important;
   border-color: #2f3d51 !important;
-  color: #f2f2f2;
+  color: #f2f2f2 !important;
   border-radius: 20px !important;
   width: 20%;
   transition: all 0.6s !important;
@@ -40,7 +70,7 @@
 }
 
 .btn-dark .back-btn:focus {
-  color: #f2f2f2;
+  color: #f2f2f2 !important;
   background-color: #2f3d51 !important;
   border-color: #2f3d51 !important;
   box-shadow: 0 0 0 0.2rem rgba(93, 106, 125, 0.6) !important;
@@ -307,6 +337,15 @@
   padding-left: 15px !important;
 }
 
+.sidebar .nav-link.active:hover {
+  color: #f2f2f2;
+  background-color: #5d6a7d;
+  border-left: 5px solid #60d1c1;
+  border-radius: 0px 15px 15px 0px;
+  font-weight: bold;
+  padding-left: 15px !important;
+}
+
 .sidebar-sticky .dash-nav li a:hover {
   color: #60d1c1;
   background-color: #5d6a7d;
@@ -549,5 +588,339 @@
     display: block;
     width: 100%;
     margin-top: 20px;
+  }
+}
+
+/* Dashboard Section */
+.dash-output-section h2 {
+  color: #2f3d51;
+  /* margin-bottom: 25px; */
+}
+
+.dash-output-section .dash-form {
+}
+
+.dash-output-section .dash-form input[type='email'],
+.dash-output-section .dash-form input[type='password'],
+.dash-output-section .dash-form input[type='text'],
+.dash-output-section .dash-form input[type='date'],
+.dash-output-section .dash-form select,
+.modal .modal-dialog .modal-content .modal-body form input[type='password'] {
+  border-color: #b3b3b3;
+  background-color: #ffffff !important;
+  height: 45px !important;
+  color: #2f3d51;
+  transition: all 0.6s !important;
+  width: 90%;
+  outline: none !important;
+}
+
+.dash-output-section .dash-form select option {
+  color: #2f3d51 !important;
+  font-size: 16px !important;
+}
+
+.dash-output-section .dash-form select {
+  font-size: 15px !important;
+}
+
+.dash-output-section .dash-form select option:disabled {
+  color: #2f3d51 !important;
+}
+
+.dash-output-section .dash-form textarea {
+  border-color: #ccc;
+  background-color: #ffffff !important;
+}
+
+.dash-output-section .dash-form input[type='email']::placeholder,
+.dash-output-section .dash-form input[type='password']::placeholder,
+.dash-output-section .dash-form input[type='text']::placeholder,
+.dash-output-section .dash-form input[type='date']::placeholder,
+.modal
+  .modal-dialog
+  .modal-content
+  .modal-body
+  .dash-form
+  input[type='password']::placeholder {
+  font-size: 15px;
+}
+
+.dash-output-section .dash-form select:focus,
+.dash-output-section .dash-form input:focus,
+.dash-output-section .dash-form textarea:focus {
+  box-shadow: 0 0 0 rgba(47, 61, 81, 0.8);
+  border-color: #567d82;
+  outline: none !important;
+}
+
+.dash-output-section input:-moz-read-only {
+  /* For Firefox */
+  background-color: #f2f2f2 !important;
+  border-color: #ccc !important;
+  color: #2f3d51;
+  cursor: not-allowed;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dash-output-section input:read-only {
+  background-color: #f2f2f2 !important;
+  border-color: #ccc !important;
+  color: #2f3d51;
+  opacity: 1;
+  cursor: not-allowed;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dash-output-section input:read-only:focus {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.8) !important;
+  -webkit-user-select: none;
+}
+
+.dash-output-section form label,
+.modal .modal-dialog .modal-content .modal-body form label {
+  text-align: left !important;
+  display: block !important;
+  font-weight: 700;
+  color: #2f3d51;
+}
+
+.dash-output-section .dash-form .btn-dark {
+  width: 20%;
+  font-size: 18px;
+}
+
+.dash-output-section .dash-form .btn-secondary {
+  width: 20%;
+  font-size: 18px !important;
+  height: 40px;
+}
+
+/* MEDIA QUERRIES */
+@media screen and (max-width: 991px) {
+  .dash-output-section .dash-form .btn-dark {
+    width: 35%;
+  }
+
+  .dash-output-section .dash-form .btn-secondary {
+    width: 35%;
+    height: 40px;
+  }
+
+  .dash-output-section .dash-form input[type='email'],
+  .dash-output-section .dash-form input[type='password'],
+  .dash-output-section .dash-form input[type='text'],
+  .dash-output-section .dash-form input[type='date'],
+  .dash-output-section .dash-form select,
+  .modal .modal-dialog .modal-content .modal-body form input[type='password'] {
+    height: 45px !important;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dash-output-section .dash-form .btn-dark {
+    width: 80%;
+    font-size: 18px;
+  }
+
+  .dash-output-section .dash-form .btn-secondary {
+    width: 80%;
+    font-size: 18px !important;
+    height: 40px;
+  }
+
+  .dash-output-section form label,
+  .modal .modal-dialog .modal-content .modal-body form label {
+    font-size: 18px;
+  }
+
+  .dash-output-section .dash-form input[type='email']::placeholder,
+  .dash-output-section .dash-form input[type='password']::placeholder,
+  .dash-output-section .dash-form input[type='text']::placeholder,
+  .dash-output-section .dash-form input[type='date']::placeholder,
+  .modal
+    .modal-dialog
+    .modal-content
+    .modal-body
+    .dash-form
+    input[type='password']::placeholder {
+    font-size: 16px;
+  }
+
+  .dash-output-section .dash-form input[type='email'],
+  .dash-output-section .dash-form input[type='password'],
+  .dash-output-section .dash-form input[type='text'],
+  .dash-output-section .dash-form input[type='date'],
+  .dash-output-section .dash-form select,
+  .modal .modal-dialog .modal-content .modal-body form input[type='password'] {
+    height: 45px !important;
+    width: 100%;
+    font-size: 16px !important;
+  }
+
+  .dash-output-section .dash-form .top-3 {
+    margin-top: 1.5rem !important;
+  }
+
+  .dash-output-section .dash-form {
+    width: 70%;
+    margin: auto;
+  }
+
+  .dash-output-section .dash-form select option {
+    font-size: 16px !important;
+  }
+
+  .dash-output-section .dash-form select {
+    font-size: 17px !important;
+  }
+
+  .dash-output-section .head-title {
+    font-size: 35px !important;
+    padding-left: 10px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .dash-output-section .dash-form .btn-dark {
+    width: 100%;
+    font-size: 17px;
+  }
+
+  .dash-output-section .dash-form .btn-secondary {
+    width: 100%;
+    font-size: 17px !important;
+    height: 40px;
+  }
+
+  .dash-output-section form label,
+  .modal .modal-dialog .modal-content .modal-body form label {
+    font-size: 16px;
+  }
+
+  .dash-output-section .dash-form input[type='email']::placeholder,
+  .dash-output-section .dash-form input[type='password']::placeholder,
+  .dash-output-section .dash-form input[type='text']::placeholder,
+  .dash-output-section .dash-form input[type='date']::placeholder,
+  .modal
+    .modal-dialog
+    .modal-content
+    .modal-body
+    .dash-form
+    input[type='password']::placeholder {
+    font-size: 15px;
+  }
+
+  .dash-output-section .dash-form input[type='email'],
+  .dash-output-section .dash-form input[type='password'],
+  .dash-output-section .dash-form input[type='text'],
+  .dash-output-section .dash-form input[type='date'],
+  .dash-output-section .dash-form select,
+  .modal .modal-dialog .modal-content .modal-body form input[type='password'] {
+    height: 45px !important;
+    width: 100%;
+    font-size: 16px !important;
+  }
+
+  .dash-output-section .dash-form .top-3 {
+    margin-top: 1.5rem !important;
+  }
+
+  .dash-output-section .dash-form {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  .dash-output-section .dash-form select option {
+    font-size: 16px !important;
+  }
+
+  .dash-output-section .dash-form select {
+    font-size: 16px !important;
+  }
+
+  .dash-output-section .head-title {
+    font-size: 35px !important;
+    padding-left: 10px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .dash-output-section .dash-form .btn-dark {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .dash-output-section .dash-form .btn-secondary {
+    width: 100%;
+    font-size: 16px !important;
+    height: 40px;
+  }
+
+  .dash-output-section form label,
+  .modal .modal-dialog .modal-content .modal-body form label {
+    font-size: 14px;
+  }
+
+  .dash-output-section .dash-form input[type='email']::placeholder,
+  .dash-output-section .dash-form input[type='password']::placeholder,
+  .dash-output-section .dash-form input[type='text']::placeholder,
+  .dash-output-section .dash-form input[type='date']::placeholder,
+  .modal
+    .modal-dialog
+    .modal-content
+    .modal-body
+    .dash-form
+    input[type='password']::placeholder {
+    font-size: 14px;
+  }
+
+  .dash-output-section .dash-form input[type='email'],
+  .dash-output-section .dash-form input[type='password'],
+  .dash-output-section .dash-form input[type='text'],
+  .dash-output-section .dash-form input[type='date'],
+  .dash-output-section .dash-form select,
+  .modal .modal-dialog .modal-content .modal-body form input[type='password'] {
+    height: 40px !important;
+    width: 100%;
+    font-size: 14.5px !important;
+  }
+
+  .dash-output-section .dash-form .top-3 {
+    margin-top: 1.5rem !important;
+  }
+
+  .dash-output-section .dash-form {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  .dash-output-section .dash-form select option {
+    font-size: 14.5px !important;
+  }
+
+  .dash-output-section .dash-form select {
+    font-size: 14px !important;
+  }
+
+  .dash-output-section .head-title {
+    font-size: 25px !important;
+    padding-left: 10px;
+    text-align: center;
   }
 }
