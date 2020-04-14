@@ -20,7 +20,7 @@ import {
   validateEmail,
 } from '../Validations';
 
-class MainContent extends Component {
+class AddUsersContent extends Component {
   constructor(props) {
     super(props);
     this.lastname = React.createRef();
@@ -268,7 +268,7 @@ class MainContent extends Component {
         className="col-md-9 ml-sm-auto col-lg-10 px-4 main-content"
       >
         <div className="dash-output-section">
-          <h2 className="head-title">Add User</h2>
+          <h3 className="head-title">Add User</h3>
           <div className="dash-form mt-4">
             <form
               method=""
@@ -473,8 +473,8 @@ class MainContent extends Component {
   }
 }
 
-MainContent.propTypes = {
+AddUsersContent.propTypes = {
   userData: PropTypes.object.isRequired,
 };
 
-export default connect()(MainContent);
+export default connect()(AddUsersContent);

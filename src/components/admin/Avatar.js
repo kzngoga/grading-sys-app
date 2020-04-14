@@ -18,7 +18,7 @@ const Avatar = ({ logout, userData }) => {
       <li className="nav-item avatar">
         <span className="user-img">
           <span className="user-icon">{`${lname}${fname}`}</span>
-          <span className="hello-user mt-2">{`${userData.firstname} ${userData.lastname}`}</span>
+          <span className="hello-user mt-2">{`${userData.lastname} ${userData.firstname}`}</span>
           <p className="pt-0 mt-0">{userData.role}</p>
         </span>
       </li>
