@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable comma-dangle */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-shadow */
@@ -88,19 +90,81 @@ class MainContent extends Component {
               data-toggle="modal"
             >
               <span>
-                Reset Password
+                Change Password
                 <FontAwesomeIcon icon={['fas', 'user-lock']} className="ml-2" />
               </span>
             </Link>
-            <Link
-              className="btn btn-dark back-btn mr-3"
-              to="/admin/edit/profile"
-            >
+            <Link className="btn btn-dark back-btn mr-3" to="#">
               <span>
                 Edit Profile
                 <FontAwesomeIcon icon={['fas', 'user-edit']} className="ml-2" />
               </span>
             </Link>
+          </div>
+          <div className="modal fade" id="reset">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                {/* Modal Header */}
+                <div className="modal-header">
+                  <h4 className="modal-title"> Change Password</h4>
+                  <button type="button" className="close" data-dismiss="modal">
+                    &times;
+                  </button>
+                </div>
+                {/* Modal body */}
+                <div className="modal-body">
+                  <div className="dash-form mt-2">
+                    <form
+                      method=""
+                      id="myForm"
+                      autoComplete="off"
+                      className=""
+                      noValidate
+                      onSubmit={this.handleSubmit}
+                    >
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label htmlFor="lname">Old Password</label>
+                          <input
+                            className="form-control w-100"
+                            type="text"
+                            placeholder="Enter Lastname"
+                            name="lastname"
+                            id="lastname"
+                            ref={this.lastname}
+                            onChange={this.HandleChange}
+                            onBlur={this.handleBlur}
+                          />
+                          <span className="helper-text" />
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label htmlFor="lname">New Password</label>
+                          <input
+                            className="form-control w-100"
+                            type="text"
+                            placeholder="Enter Lastname"
+                            name="lastname"
+                            id="lastname"
+                            ref={this.lastname}
+                            onChange={this.HandleChange}
+                            onBlur={this.handleBlur}
+                          />
+                          <span className="helper-text" />
+                        </div>
+                      </div>
+                      <center>
+                        <button
+                          className="btn btn-dark form-control mt-2"
+                          type="submit"
+                        >
+                          <span>Add User</span>
+                        </button>
+                      </center>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>

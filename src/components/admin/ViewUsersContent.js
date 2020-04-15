@@ -24,7 +24,7 @@ class ViewUsersContent extends Component {
     // const { userData } = this.props;
 
     const { noData, loadData } = this.state;
-
+    const userID = 4;
     return (
       <main
         role="main"
@@ -129,7 +129,7 @@ class ViewUsersContent extends Component {
                             Edit
                           </Link>
                           <Link
-                            to="/admin/user/profile/1"
+                            to={`/admin/user/profile/${userID}`}
                             class="dropdown-item table-link"
                           >
                             <FontAwesomeIcon
@@ -154,7 +154,7 @@ class ViewUsersContent extends Component {
                       </div>
                     </td>
                   </tr>
-                  <div className="modal" id="remove1">
+                  <div className="modal fade" id="remove1">
                     <div className="modal-dialog">
                       <div className="modal-content">
                         {/* Modal Header */}
