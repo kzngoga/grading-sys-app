@@ -346,7 +346,7 @@ class AddUsersContent extends Component {
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                   </select>
-                  <span className="helper-text"></span>
+                  <span className="helper-text" />
                 </div>
 
                 {/* Address */}
@@ -394,7 +394,7 @@ class AddUsersContent extends Component {
                     <option value="Rwamagana">Rwamagana</option>
                     <option value="Kayonza">Kayonza</option>
                   </select>
-                  <span className="helper-text"></span>
+                  <span className="helper-text" />
                 </div>
 
                 {/* Role */}
@@ -414,7 +414,7 @@ class AddUsersContent extends Component {
                     <option value="Admin">Administrator</option>
                     <option value="Dos">Dos</option>
                   </select>
-                  <span className="helper-text"></span>
+                  <span className="helper-text" />
                 </div>
 
                 {/* mobileNo */}
@@ -430,7 +430,7 @@ class AddUsersContent extends Component {
                     onChange={this.HandleChange}
                     onBlur={this.handleBlur}
                   />
-                  <span className="helper-text"></span>
+                  <span className="helper-text"/>
                 </div>
               </div>
               <div className="form-group">
