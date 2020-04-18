@@ -5,7 +5,7 @@ import {
   SP_ADMIN_LOGIN_FAILED,
 } from '../../actionTypes';
 
-const teacherLoginAction = (payload) => async (dispatch) => {
+const spAdminLoginAction = (payload) => async (dispatch) => {
   try {
     const response = await axios.post(
       '/api/v1/user/superadmin/login',
@@ -44,4 +44,4 @@ const teacherLoginAction = (payload) => async (dispatch) => {
   }
 };
 
-export default teacherLoginAction;
+export default spAdminLoginAction;

@@ -1373,6 +1373,7 @@ h3.head-title {
 .modal .modal-dialog .modal-content {
   background-color: #f2f2f2;
   color: #5d6a7d;
+  border:1px dashed #5d6a7d !important;
 }
 
 .modal .modal-dialog .modal-content .modal-header .modal-title {

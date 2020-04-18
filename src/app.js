@@ -9,8 +9,8 @@ import Home from './pages/Home';
 import SuperAdminHome from './pages/spAdmin/Home';
 import AdminHome from './pages/admin/Home';
 import AddUsers from './pages/admin/AddUsers';
-import ViewUsers from './pages/admin/ViewUsers';
-import UserProfile from './pages/admin/UserProfile';
+import ViewUsers from './pages/spAdmin/ViewUsers';
+import UserProfile from './pages/spAdmin/UserProfile';
 import DosHome from './pages/dos/Home';
 import TeacherHome from './pages/teacher/Home';
 import StudentHome from './pages/student/Home';
@@ -31,9 +31,10 @@ const App = () => (
         <Route path="/teacher/login" component={TeacherLogin} />
         <Route path="/super/admin/home" component={SuperAdminHome} />
         <Route path="/admin/home" component={AdminHome} />
-        <Route path="/admin/users/add" component={AddUsers} />
-        <Route path="/admin/users/view" component={ViewUsers} />
-        <Route path="/admin/user/profile/:user_id" component={UserProfile} />
+        <Route path="/users/add/new" component={AddUsers} />
+        <Route path="/users/view/" component={ViewUsers} />
+        <Route path="/users/view/page/:pageNum" component={ViewUsers} />
+        <Route path="/user/profile/:user_id" component={UserProfile} />
         <Route path="/dos/home" component={DosHome} />
         <Route path="/teacher/home" component={TeacherHome} />
         <Route path="/student/home" component={StudentHome} />
