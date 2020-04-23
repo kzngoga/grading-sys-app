@@ -1,3 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable consistent-return */
+/* eslint-disable react/no-deprecated */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable global-require */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/state-in-constructor */
@@ -36,7 +41,7 @@ class SuperAdmin extends Component {
     const { spAdminLogin } = nextProps;
     if (spAdminLogin.status === 'success') {
       this.setState({
-        email: '',
+        username: '',
         password: '',
         loadText: false,
         withErrors: false,
@@ -58,7 +63,6 @@ class SuperAdmin extends Component {
         this.setState({
           withErrors: true,
           loadText: false,
-          isLoggedIn: false,
           ErrMessage: 'Ooops, An error Occured!',
         });
       }
@@ -66,7 +70,6 @@ class SuperAdmin extends Component {
         return this.setState({
           loadText: false,
           withErrors: true,
-          isLoggedIn: false,
           ErrMessage: 'Invalid Username / Password!',
         });
       }

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-inner-declarations */
 /* eslint-disable consistent-return */
 /* eslint-disable react/state-in-constructor */
@@ -9,9 +10,9 @@ import { Redirect } from 'react-router-dom';
 import '../../styles/dash.css';
 import DashNav from '../../components/spAdmin/DashNav';
 import SideBar from '../../components/spAdmin/SideBar';
-import MainContent from '../../components/spAdmin/MainContent';
+import ViewUsersContent from '../../components/spAdmin/ViewUsersContent';
 
-class Home extends Component {
+class ViewUsers extends Component {
   state = {
     redirect: false,
     spAdminData: {},
@@ -28,7 +29,7 @@ class Home extends Component {
       this.setState({ spAdminData: JSON.parse(SpAdminData) });
     }
 
-    document.title = 'Homepage | Grader';
+    document.title = 'View Users | Grader';
   }
 
   handleLogout = () => {
@@ -41,14 +42,13 @@ class Home extends Component {
     if (redirect) {
       return <Redirect to="/super/admin/login" />;
     }
-
     return (
       <div>
         <DashNav logout={this.handleLogout} spAdminData={spAdminData} />
         <div className="container-fluid">
           <div className="row">
             <SideBar />
-            <MainContent spAdminData={spAdminData} />
+            <ViewUsersContent spAdminData={spAdminData} />
           </div>
         </div>
       </div>
@@ -56,4 +56,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default ViewUsers;
