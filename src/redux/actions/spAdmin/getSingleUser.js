@@ -22,7 +22,6 @@ const getSingleUserAction = (id) => async (dispatch) => {
       message,
       results: data,
     });
-    console.log(response.data.data);
   } catch (err) {
     let error = {};
     if (err.response) {
@@ -40,7 +39,6 @@ const getSingleUserAction = (id) => async (dispatch) => {
       type: FETCH_SINGLE_USER_FAILED,
       error,
     });
-    // console.log(err.response.data);
   }
 };
 

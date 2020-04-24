@@ -8,7 +8,7 @@ import store from './redux/store';
 import Home from './pages/Home';
 import SuperAdminHome from './pages/spAdmin/Home';
 import AdminHome from './pages/admin/Home';
-import AddUsers from './pages/admin/AddUsers';
+import AddUsers from './pages/spAdmin/AddUsers';
 import ViewUsers from './pages/spAdmin/ViewUsers';
 import UserProfile from './pages/spAdmin/UserProfile';
 import DosHome from './pages/dos/Home';

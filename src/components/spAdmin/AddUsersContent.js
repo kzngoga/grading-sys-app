@@ -1,3 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/no-deprecated */
+/* eslint-disable consistent-return */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
 /* eslint-disable react/state-in-constructor */
@@ -9,7 +14,9 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   validateLastName,
   validateFirstName,
@@ -19,6 +26,7 @@ import {
   validateAddress,
   validateEmail,
 } from '../Validations';
+import addUsersAction from '../../redux/actions/spAdmin/addUsers';
 
 class AddUsersContent extends Component {
   constructor(props) {
@@ -30,6 +38,7 @@ class AddUsersContent extends Component {
     this.address = React.createRef();
     this.role = React.createRef();
     this.mobileNo = React.createRef();
+    this.selected = React.createRef();
   }
 
   state = {
@@ -43,6 +52,76 @@ class AddUsersContent extends Component {
       isRole: false,
       isMobileNo: false,
     },
+    valider: false,
+    ErrMessage: '',
+    withErrors: false,
+    firstname: '',
+    lastname: '',
+    gender: '',
+    email: '',
+    address: '',
+    role: '',
+    mobileNo: '',
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const { addUsers } = nextProps;
+    if (addUsers.status === 'success') {
+      this.props.history.push('/users/view/', {
+        submitted: true,
+        message: 'User Added Successfully!',
+      });
+      this.setState({
+        loadText: false,
+        withErrors: false,
+      });
+    }
+
+    if (addUsers.status === 'error') {
+      const {
+        error: { status },
+      } = addUsers;
+      if (status === 500) {
+        this.setState({
+          withErrors: true,
+          loadText: false,
+          ErrMessage: 'Ooops, An error Occured!, Try Again',
+        });
+      }
+      if (status === 409) {
+        this.setState({
+          loadText: false,
+          withErrors: true,
+          ErrMessage: 'User Already Added!',
+        });
+      }
+    }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { addUsersAction: addUsers } = this.props;
+    this.setState({
+      loadText: true,
+    });
+    const {
+      firstname,
+      lastname,
+      gender,
+      email,
+      address,
+      role,
+      mobileNo,
+    } = this.state;
+    return addUsers({
+      firstname,
+      lastname,
+      gender,
+      email,
+      address,
+      role,
+      mobileNo,
+    });
   };
 
   HandleChange = (e) => {
@@ -55,6 +134,9 @@ class AddUsersContent extends Component {
     const mobileNo = this.mobileNo.current;
     const input = e.target.id;
 
+    this.setState({
+      [input]: e.target.value,
+    });
     // Validate Lastname
     if (input === 'lastname') {
       validateLastName(lname);
@@ -225,12 +307,7 @@ class AddUsersContent extends Component {
     }
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   render() {
-    // const { userData } = this.props;
 
     const {
       loadText,
@@ -243,6 +320,12 @@ class AddUsersContent extends Component {
         isRole,
         isMobileNo,
       },
+      ErrMessage,
+      withErrors,
+      firstname,
+      lastname,
+      email,
+      mobileNo,
     } = this.state;
 
     // toggling the button's disability to true / false
@@ -267,6 +350,17 @@ class AddUsersContent extends Component {
         className="col-md-9 ml-sm-auto col-lg-10 px-4 main-content"
       >
         <div className="dash-output-section">
+          {withErrors ? (
+            <>
+              <div className="alert alert-danger fade show">
+                <button type="button" className="close" data-dismiss="alert">
+                  &times;
+                </button>
+                <strong>Error!</strong> {ErrMessage}
+              </div>
+            </>
+          ) : null}
+
           <h3 className="head-title">Add User</h3>
           <div className="dash-form mt-4">
             <form
@@ -284,6 +378,7 @@ class AddUsersContent extends Component {
                   <label htmlFor="lname">User's Lastname</label>
                   <input
                     className="form-control"
+                    
                     type="text"
                     placeholder="Enter Lastname"
                     name="lastname"
@@ -291,6 +386,7 @@ class AddUsersContent extends Component {
                     ref={this.lastname}
                     onChange={this.HandleChange}
                     onBlur={this.handleBlur}
+                    value={lastname}
                   />
                   <span className="helper-text" />
                 </div>
@@ -307,6 +403,7 @@ class AddUsersContent extends Component {
                     ref={this.firstname}
                     onChange={this.HandleChange}
                     onBlur={this.handleBlur}
+                    value={firstname}
                   />
                   <span className="helper-text" />
                 </div>
@@ -323,6 +420,7 @@ class AddUsersContent extends Component {
                     ref={this.email}
                     onChange={this.HandleChange}
                     onBlur={this.handleBlur}
+                    value={email}
                   />
                   <span className="helper-text" />
                 </div>
@@ -341,9 +439,8 @@ class AddUsersContent extends Component {
                     <option selected disabled value="0">
                       Select Gender
                     </option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
                   </select>
                   <span className="helper-text" />
                 </div>
@@ -411,7 +508,7 @@ class AddUsersContent extends Component {
                       Select Role
                     </option>
                     <option value="Admin">Administrator</option>
-                    <option value="Dos">Dos</option>
+                    <option value="DOS">Dos</option>
                   </select>
                   <span className="helper-text" />
                 </div>
@@ -428,8 +525,9 @@ class AddUsersContent extends Component {
                     ref={this.mobileNo}
                     onChange={this.HandleChange}
                     onBlur={this.handleBlur}
+                    value={mobileNo}
                   />
-                  <span className="helper-text"/>
+                  <span className="helper-text" />
                 </div>
               </div>
               <div className="form-group">
@@ -473,7 +571,12 @@ class AddUsersContent extends Component {
 }
 
 AddUsersContent.propTypes = {
-  userData: PropTypes.object.isRequired,
+  addUsers: PropTypes.object.isRequired,
+  addUsersAction: PropTypes.func.isRequired,
 };
 
-export default connect()(AddUsersContent);
+const mapStateFromProps = ({ addUsers }) => ({ addUsers });
+
+export default connect(mapStateFromProps, { addUsersAction })(
+  withRouter(AddUsersContent)
+);
