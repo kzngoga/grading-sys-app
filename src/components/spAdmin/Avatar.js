@@ -8,7 +8,6 @@ import '../../styles/dash.css';
 
 const Avatar = ({ logout, spAdminData }) => {
   const spRole = spAdminData.role === undefined ? '' : spAdminData.role;
-  console.log(spAdminData);
   return (
     <ul className="navbar-nav admin-avatar ml-auto">
       <li className="nav-item avatar">

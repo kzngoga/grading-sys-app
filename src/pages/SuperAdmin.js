@@ -135,7 +135,6 @@ class SuperAdmin extends Component {
     } = this.state;
     const togglEye = isPasswordShown ? 'eye-slash' : 'eye';
     const slashColor = isPasswordShown ? '#1ca48c' : '#9199a6';
-    console.log(this.props.spAdminLogin);
     return (
       <>
         <WelcomeNav2 compt="home" />

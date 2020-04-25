@@ -1,24 +1,24 @@
 /* eslint-disable no-console */
 import axios from '..';
-import { FETCH_USERS_SUCCESS, FETCH_USERS_FAILED } from '../../actionTypes';
+import { ADD_USER_SUCCESS, ADD_USER_FAILED } from '../../actionTypes';
 
 const token = localStorage.getItem('SpAdminToken');
-const getUsersAction = () => async (dispatch) => {
+const addUsersAction = (payload) => async (dispatch) => {
   try {
-    const response = await axios.get('/api/v1/users', {
+    const response = await axios.post('/api/v1/users/new', payload, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         Authorization: `Bearer ${token}`,
       },
     });
     const {
-      data: { message, data },
+      data: { message },
     } = response;
     dispatch({
-      type: FETCH_USERS_SUCCESS,
+      type: ADD_USER_SUCCESS,
       message,
-      results: data,
     });
+
   } catch (err) {
     let error = {};
     if (err.response) {
@@ -33,10 +33,11 @@ const getUsersAction = () => async (dispatch) => {
       };
     }
     dispatch({
-      type: FETCH_USERS_FAILED,
+      type: ADD_USER_FAILED,
       error,
     });
+
   }
 };
 
-export default getUsersAction;
+export default addUsersAction;

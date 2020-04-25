@@ -1,3 +1,4 @@
+/* eslint-disable react/no-deprecated */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-console */
@@ -269,7 +270,8 @@ class UserProfileContent extends Component {
 }
 
 UserProfileContent.propTypes = {
-  userData: PropTypes.object.isRequired,
+  getSingleUserAction: PropTypes.object.isRequired,
+  getSingleUser: PropTypes.object.isRequired,
 };
 
 const mapStateFromProps = ({ getSingleUser }) => ({ getSingleUser });

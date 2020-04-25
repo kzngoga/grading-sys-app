@@ -684,6 +684,10 @@ h3.head-title {
   outline: none !important;
 }
 
+.submited{
+  border-color: #b3b3b3;
+}
+
 .dash-output-section .dash-form select option {
   color: #2f3d51 !important;
   font-size: 16px !important;

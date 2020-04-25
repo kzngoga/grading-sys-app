@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tuner Email Verification</title>
+    <style>
+      section {
+        font-family: proxima-nova, sans-serif;
+        text-align: center;
+        margin: auto;
+        width: 80%;
+      }
+      .tuner_logo {
+        background-color: hsl(0, 0%, 26%);
+        height: 280px;
+      }
+      .tuner_logo img {
+        margin-top: 50px;
+        width: 300px;
+      }
+      .verify {
+        color: rgb(224, 224, 224);
+        font-size: 25px;
+        margin-top: 30px;
+      }
+      .password {
+        margin-top: 15px;
+      }
+      .small_text {
+        font-size: 16px;
+        margin-top: 14px;
+        color: #424242;
+      }
+      .email_body {
+        color: #424242;
+        margin: auto;
+        width: 40%;
+      }
+      .verify_button {
+        background-color: #faf33e;
+        color: #424242;
+        padding: 2px 12px;
+        font-size: 20px;
+        margin-top: 40px;
+      }
+      .email_body_a {
+        color: #a3a3a3;
+      }
+      a {
+        text-decoration: none;
+      }
+      .email_body_b {
+        color: #424242;
+        margin-left: 10px;
+      }
+      .footer_text {
+        font-size: 14px;
+        margin-top: 20px;
+      }
+      @media screen and (max-width: 812px) {
+        section {
+          width: 95%;
+        }
+        .small_text {
+          font-size: 12px;
+        }
+        .email_body {
+          width: 100%;
+          font-size: 13px;
+        }
+        .email_body_b {
+          color: #424242;
+          margin-left: 10px;
+        }
+        .footer_text {
+          font-size: 12px;
+        }
+        .tuner_logo {
+          height: 280px;
+        }
+        .tuner_logo img {
+          margin-top: 70px;
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="tuner_logo">
+        <img
+          src="https://res.cloudinary.com/drayzii/image/upload/v1581497300/Logo_kip9uj.png"
+          alt="tuner_logo"
+        />
+        <div>
+          <h2 class="verify">Login Info</h2>
+        </div>
+      </div>
+      <div class="small_text">
+        <p>
+          <strong>Here are your login credentials</strong>
+        </p>
+      </div>
+      <div class="email_body">
+        <div class="email_body_cont">
+          <span class="email_body_a">Email: </span>
+          <span class="email_body_b"><%= email %></span>
+        </div>
+      </div>
+      <div class="password_body">
+        <div class="password_body_cont">
+          <span class="password_body_a">Password: </span>
+          <span class="password_body_b"><%= genpwd %></span>
+        </div>
+      </div>
+      <p class="footer_text">
+        Didn't create an account? Feel free to ignore this email or
+        <span style="color:#424242"><u>CONTACT US</u></span> if you have any
+        issues.
+      </p>
+    </section>
+  </body>
+</html>
