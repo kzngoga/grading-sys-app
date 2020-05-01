@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import SuperAdminHome from './pages/spAdmin/Home';
 import AdminHome from './pages/admin/Home';
 import AddUsers from './pages/spAdmin/AddUsers';
+import UpdateUsers from './pages/spAdmin/UpdateUsers';
 import ViewUsers from './pages/spAdmin/ViewUsers';
 import UserProfile from './pages/spAdmin/UserProfile';
 import DosHome from './pages/dos/Home';
@@ -35,6 +36,7 @@ const App = () => (
         <Route path="/users/view/" component={ViewUsers} />
         <Route path="/users/view/page/:pageNum" component={ViewUsers} />
         <Route path="/user/profile/:user_id" component={UserProfile} />
+        <Route path="/user/edit/:user_id" component={UpdateUsers} />
         <Route path="/dos/home" component={DosHome} />
         <Route path="/teacher/home" component={TeacherHome} />
         <Route path="/student/home" component={StudentHome} />

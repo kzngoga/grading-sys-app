@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/no-deprecated */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-nested-ternary */
@@ -154,7 +155,7 @@ class UserProfileContent extends Component {
                                 </span>
                               </div>
                               <Link
-                                to="/admin/user/edit/1"
+                                to={`/user/edit/${id}`}
                                 className="btn btn-info mt-4"
                               >
                                 <FontAwesomeIcon
@@ -272,6 +273,7 @@ class UserProfileContent extends Component {
 UserProfileContent.propTypes = {
   getSingleUserAction: PropTypes.object.isRequired,
   getSingleUser: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 const mapStateFromProps = ({ getSingleUser }) => ({ getSingleUser });

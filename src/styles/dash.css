@@ -731,7 +731,7 @@ h3.head-title {
   /* For Firefox */
   background-color: #f2f2f2 !important;
   border-color: #ccc !important;
-  color: #2f3d51;
+  color: gray !important;
   cursor: not-allowed;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -744,7 +744,7 @@ h3.head-title {
 .dash-output-section input:read-only {
   background-color: #f2f2f2 !important;
   border-color: #ccc !important;
-  color: #2f3d51;
+  color: gray !important;
   opacity: 1;
   cursor: not-allowed;
   -webkit-touch-callout: none;

@@ -233,7 +233,7 @@ class ViewUsersContent extends Component {
                               </Link>
                               <div className="dropdown-menu dropdown-menu-right">
                                 <Link
-                                  to="/admin/user/edit/1"
+                                  to={`/user/edit/${user._id}`}
                                   className="dropdown-item table-link"
                                 >
                                   <FontAwesomeIcon

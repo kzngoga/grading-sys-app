@@ -14,7 +14,7 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -52,7 +52,6 @@ class AddUsersContent extends Component {
       isRole: false,
       isMobileNo: false,
     },
-    valider: false,
     ErrMessage: '',
     withErrors: false,
     firstname: '',
