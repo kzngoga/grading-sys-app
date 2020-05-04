@@ -102,7 +102,7 @@ class MainContent extends Component {
             <div className="row">
               <ActivityDiv
                 name="Users"
-                path="/admin/users/view"
+                path="/users/view/"
                 bgColor="bg-info"
                 borderColor="#17a2b8"
                 icon="user-lock"
